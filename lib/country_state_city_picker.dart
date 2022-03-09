@@ -38,13 +38,17 @@ class SelectState extends StatefulWidget {
   _SelectStateState createState() => _SelectStateState();
 }
 
+const _defaultCountry = "Choose Country";
+const _defaultState = "Choose State/Province";
+const _defaultCity = "Choose City";
+
 class _SelectStateState extends State<SelectState> {
-  List<String> _cities = ["Choose City"];
-  List<String> _country = ["Choose Country"];
-  String _selectedCity = "Choose City";
-  String _selectedCountry = "Choose Country";
-  String _selectedState = "Choose State/Province";
-  List<String> _states = ["Choose State/Province"];
+  List<String> _cities = [_defaultCity];
+  List<String> _country = [_defaultCountry];
+  String _selectedCity = _defaultCity;
+  String _selectedCountry = _defaultCountry;
+  String _selectedState = _defaultState;
+  List<String> _states = [_defaultState];
   var responses;
 
   @override
@@ -126,8 +130,8 @@ class _SelectStateState extends State<SelectState> {
   void _onSelectedCountry(String value) {
     if (!mounted) return;
     setState(() {
-      _selectedState = "Choose  State/Province";
-      _states = ["Choose  State/Province"];
+      _selectedState = _defaultState;
+      _states = [_defaultState];
       _selectedCountry = value;
       this.widget.onCountryChanged(value);
       getState();
@@ -137,8 +141,8 @@ class _SelectStateState extends State<SelectState> {
   void _onSelectedState(String value) {
     if (!mounted) return;
     setState(() {
-      _selectedCity = "Choose City";
-      _cities = ["Choose City"];
+      _selectedCity = _defaultCity;
+      _cities = [_defaultCity];
       _selectedState = value;
       this.widget.onStateChanged(value);
       getCity();
@@ -217,11 +221,11 @@ class _SelectStateState extends State<SelectState> {
             value: _selectedState,
           )),
         ),
-        if (_selectedState == "Choose State/Province" || _cities.length > 1)
+        if (_selectedState == _defaultState || _cities.length > 1)
           SizedBox(
             height: widget.spacing,
           ),
-        if (_selectedState == "Choose State/Province" || _cities.length > 1)
+        if (_selectedState == _defaultState || _cities.length > 1)
           InputDecorator(
             decoration: widget.decoration,
             child: DropdownButtonHideUnderline(
