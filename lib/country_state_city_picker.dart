@@ -217,36 +217,38 @@ class _SelectStateState extends State<SelectState> {
             value: _selectedState,
           )),
         ),
-        SizedBox(
-          height: widget.spacing,
-        ),
-        InputDecorator(
-          decoration: widget.decoration,
-          child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
-            dropdownColor: widget.dropdownColor,
-            isExpanded: true,
-            items: _cities.map((String dropDownStringItem) {
-              return DropdownMenuItem<String>(
-                value: dropDownStringItem,
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: Text(
-                        dropDownStringItem,
-                        style: widget.style,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    )
-                  ],
-                ),
-              );
-            }).toList(),
-            onChanged: (value) => _onSelectedCity(value!),
-            onTap: widget.onCityTap,
-            value: _selectedCity,
-          )),
-        ),
+        if (_selectedState == "Choose State/Province" || _cities.length > 1)
+          SizedBox(
+            height: widget.spacing,
+          ),
+        if (_selectedState == "Choose State/Province" || _cities.length > 1)
+          InputDecorator(
+            decoration: widget.decoration,
+            child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+              dropdownColor: widget.dropdownColor,
+              isExpanded: true,
+              items: _cities.map((String dropDownStringItem) {
+                return DropdownMenuItem<String>(
+                  value: dropDownStringItem,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          dropDownStringItem,
+                          style: widget.style,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }).toList(),
+              onChanged: (value) => _onSelectedCity(value!),
+              onTap: widget.onCityTap,
+              value: _selectedCity,
+            )),
+          ),
       ],
     );
   }
